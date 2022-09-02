@@ -15,7 +15,7 @@ public class TwoSum {
             return new int[0];
         }
         // Array to store the output
-        int[] pair = new int[2];
+        int[] pair = new int[]{-1, -1};
         // Now, we will check for every combination of elements
         // to find if their sum is equal to the target
         for (int i = 0; i < nums.length; i++) {
@@ -41,7 +41,7 @@ public class TwoSum {
             return new int[0];
         }
         // Array to store the output
-        int[] pair = new int[2];
+        int[] pair = new int[]{-1, -1};
         // This Map will store the compliment of every
         // element in the array corresponding to the target.
         // For e.g., for a valid pair a, b, b = target - a.
