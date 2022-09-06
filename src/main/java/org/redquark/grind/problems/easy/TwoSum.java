@@ -37,33 +37,29 @@ public class TwoSum {
      */
     public int[] twoSumOptimized(int[] nums, int target) {
         // Special case
-        if (nums == null || nums.length == 0) {
-            return new int[0];
+        if (nums == null || nums.length < 2) {
+            throw new IllegalArgumentException("Input array should have minimum two elements.");
         }
-        // Array to store the output
+        // Array to store the pair of element indices which satisfy
+        // the two sum condition
         int[] pair = new int[]{-1, -1};
-        // This Map will store the compliment of every
-        // element in the array corresponding to the target.
-        // For e.g., for a valid pair a, b, b = target - a.
-        // The key would be the compliment and value would
-        // be the index of the compliment
+        // Map to store the compliments of every element in the array
+        // with respect to the target. For e.g. for a valid pair a and
+        // b, b = target - a. The key in the map will be the compliment
+        // and the value would be the index of the element
         Map<Integer, Integer> compliments = new HashMap<>();
-        // Loop through the array
+        // Loop through every element of the array
         for (int i = 0; i < nums.length; i++) {
-            // Find compliment of the current element
+            // Compliment of current element w.r.t target
             int compliment = target - nums[i];
-            // If the compliment is already present in the
-            // map, we have found our pair
+            // Check if this compliment is already present
+            // in the map of compliments
             if (compliments.containsKey(compliment)) {
-                // Get index of the compliment
-                int indexOfCompliment = compliments.get(compliment);
-                pair[0] = indexOfCompliment;
+                pair[0] = compliments.get(compliment);
                 pair[1] = i;
                 return pair;
-            }
-            // If the compliment is not yet found, we will
-            // store it with the index
-            else {
+            } else {
+                // Add the current element to the map with its index
                 compliments.put(nums[i], i);
             }
         }
