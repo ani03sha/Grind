@@ -33,11 +33,11 @@ public class BestTimeToBuyAndSellStocks {
         if (prices == null || prices.length == 0) {
             return 0;
         }
-        // Variables to store the minimum price and
-        // maximum profit calculated so far.
+        // Minimum stock price
         int minimumPrice = prices[0];
-        int maximumProfit = Integer.MIN_VALUE;
-        // Loop through the array
+        // Maximum profit
+        int maximumProfit = 0;
+        // Loop through every stock price
         for (int price : prices) {
             minimumPrice = Math.min(minimumPrice, price);
             maximumProfit = Math.max(maximumProfit, price - minimumPrice);
