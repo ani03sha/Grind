@@ -14,43 +14,36 @@ public class MergeTwoSortedLists {
         if (list2 == null) {
             return list1;
         }
-        // Dummy node
-        ListNode dummy = new ListNode(-1);
-        // Head of the new list
-        ListNode head = null;
-        // Pointers to traverse through both the lists
-        ListNode temp1 = list1;
-        ListNode temp2 = list2;
-        // Loop through the list until any of them is null
-        while (temp1 != null && temp2 != null) {
-            // Choose the node with lower value
-            if (temp1.val < temp2.val) {
-                if (head == null) {
-                    head = temp1;
-                }
-                dummy.next = temp1;
-                temp1 = temp1.next;
+        // Temp node to traverse through the merged list
+        ListNode temp = new ListNode(-1);
+        // Dummy node of the merged list
+        ListNode dummy = temp;
+        // Loop through both lists until either of them
+        // becomes null
+        while (list1 != null && list2 != null) {
+            // Choose the node with lesser value from the
+            // current nodes of the two lists
+            if (list1.val < list2.val) {
+                temp.next = new ListNode(list1.val);
+                list1 = list1.next;
             } else {
-                if (head == null) {
-                    head = temp2;
-                }
-                dummy.next = temp2;
-                temp2 = temp2.next;
+                temp.next = new ListNode(list2.val);
+                list2 = list2.next;
             }
-            dummy = dummy.next;
+            temp = temp.next;
         }
-        // Process the remaining nodes
-        while (temp1 != null) {
-            dummy.next = temp1;
-            temp1 = temp1.next;
-            dummy = dummy.next;
+        // Process remaining nodes
+        while (list1 != null) {
+            temp.next = new ListNode(list1.val);
+            list1 = list1.next;
+            temp = temp.next;
         }
-        while (temp2 != null) {
-            dummy.next = temp2;
-            temp2 = temp2.next;
-            dummy = dummy.next;
+        while (list2 != null) {
+            temp.next = new ListNode(list2.val);
+            list2 = list2.next;
+            temp = temp.next;
         }
-        return head;
+        return dummy.next;
     }
 
     static class ListNode {
