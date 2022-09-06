@@ -13,31 +13,33 @@ public class ValidParentheses {
         if (s == null || s.isEmpty()) {
             return true;
         }
-        // Stack to store the left parenthesis.
+        // Stack to store the left parentheses
         Stack<Character> lefts = new Stack<>();
-        // Loop through every character of the string
+        // Loop through every character in the input string
         for (char c : s.toCharArray()) {
-            // If the current character is any of the left parenthesis,
-            // we will add it to the stack
+            // If it is any of the left parentheses, we will
+            // add it to the stack
             if (c == '(' || c == '{' || c == '[') {
-                lefts.add(c);
+                lefts.push(c);
             }
-            // If the current character is any of the right parenthesis,
-            // we will check if the top of the stack has the matching
-            // left parenthesis. If so, we will pop that left parenthesis
-            else if (c == ')' && !lefts.isEmpty() && lefts.peek() == '(') {
+            // If the current character is any of the right
+            // parentheses, we will check if the top of the
+            // stack matches with the corresponding left
+            // parentheses, we will pop it
+            else if (!lefts.isEmpty() && c == ')' && lefts.peek() == '(') {
                 lefts.pop();
-            } else if (c == '}' && !lefts.isEmpty() && lefts.peek() == '{') {
+            } else if (!lefts.isEmpty() && c == '}' && lefts.peek() == '{') {
                 lefts.pop();
-            } else if (c == ']' && !lefts.isEmpty() && lefts.peek() == '[') {
+            } else if (!lefts.isEmpty() && c == ']' && lefts.peek() == '[') {
                 lefts.pop();
             }
-            // If nothing matches, we will return false
+            // Found any invalid character
             else {
                 return false;
             }
         }
-        // Here, for valid parentheses, the stack should be empty
+        // For a balanced string, all left parentheses would be
+        // popped out, and the stack would be empty
         return lefts.isEmpty();
     }
 }
