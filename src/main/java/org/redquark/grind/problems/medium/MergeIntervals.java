@@ -8,33 +8,31 @@ import java.util.List;
 public class MergeIntervals {
 
     public int[][] merge(int[][] intervals) {
-        // Special case
-        if (intervals == null || intervals.length == 0) {
-            return new int[][]{};
-        }
-        // Sort the intervals based on the start time
+        // Sort the intervals by their start value
         Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
-        // List to store the merged intervals
+        // List of merged intervals
         List<int[]> mergedIntervals = new ArrayList<>();
         // Current interval
         int[] currentInterval = intervals[0];
-        // Add current interval to the list
+        // Add this interval to the list
         mergedIntervals.add(currentInterval);
-        // Loop for remaining intervals
-        for (int i = 1; i < intervals.length; i++) {
-            // End time of the current interval
-            int currentEndTime = currentInterval[1];
-            // Start time of the next interval
-            int nextStartTime = intervals[i][0];
-            // End time of the next interval
-            int nextEndTime = intervals[i][1];
-            // If the intervals overlap
-            if (nextStartTime <= currentEndTime) {
-                currentInterval[1] = Math.max(currentEndTime, nextEndTime);
+        // Loop for each interval
+        for (int[] interval : intervals) {
+            // Get the end of the current interval
+            int currentEnd = currentInterval[1];
+            // Get the beginning of the next interval
+            int nextBegin = interval[0];
+            // Get the end of the next interval
+            int nextEnd = interval[1];
+            // If the nextBegin is less than or equal to
+            // the currentEnd, we should merge the intervals
+            if (nextBegin <= currentEnd) {
+                currentInterval[1] = Math.max(currentEnd, nextEnd);
             }
-            // If not, we will the next interval to the list
+            // If not, then we will add the next interval in the list
             else {
-                mergedIntervals.add(intervals[i]);
+                currentInterval = interval;
+                mergedIntervals.add(currentInterval);
             }
         }
         return mergedIntervals.toArray(new int[mergedIntervals.size()][]);
